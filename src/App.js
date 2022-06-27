@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { client } from './services/client';
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,7 +16,7 @@ import CreatePage from './CreatePage';
 
 
 export default function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(client.auth.user());
 
 
   return (
@@ -43,7 +44,7 @@ export default function App() {
         <Switch>
           {/* protect this route */}
           <Route exact path="/">
-            { !user ? <AuthPage /> : <Redirect to="movies" />
+            { !user ? <AuthPage setUser={setUser} /> : <Redirect to="movies" />
             }
           </Route>
           <Route exact path="/movies">
