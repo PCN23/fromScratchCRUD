@@ -1,4 +1,6 @@
+import { SupabaseClient } from '@supabase/supabase-js';
 import { useState } from 'react';
+import { signUp } from './services/fetch.utils';
 
 
 
@@ -7,7 +9,11 @@ export default function AuthPage() {
   const [email, setEmail] = useState ('');
   const [password, setPassword] = useState ('');
 
-git ad
+  async function handleSubmit(e) {
+    e.preventDefault();
+//   use email and password from form to create a new user in Supabase.
+    const user = await signUp(email, password);
+  }
 
   return (
     <div className='forms'>
