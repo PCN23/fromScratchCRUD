@@ -22,11 +22,11 @@ export default function AuthPage() {
         <lable> email 
           {/* this is a controlled input.
             whatever shows up here becomes the state */}
-          <input value={email} type="email"/> 
+          <input onChange={e => setEmail(e.target.value)} value={email} type="email"/> 
         </lable>
       </form>
       <form>
-        <lable> password <input value={password} type="password"/>
+        <lable> password <input onChange={e => setPassword(e.target.value)} value={password} type="password"/>
         </lable>
         <button>Sign up!</button>
       </form>

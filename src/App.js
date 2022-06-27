@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom';
 import DetailPage from './DetailPage';
 import ListPage from './ListPage';
@@ -36,8 +37,10 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          {/* protect this route */}
           <Route exact path="/">
-            <AuthPage />
+            { userIsNotLoggedIn ? <AuthPage /> : <Redirect to="books" />
+            }
           </Route>
           <Route exact path="/movies">
             <ListPage />
