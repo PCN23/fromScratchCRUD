@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +15,9 @@ import CreatePage from './CreatePage';
 
 
 export default function App() {
+  const [user, setUser] = useState();
+
+
   return (
     <Router>
       <div>
@@ -39,7 +43,7 @@ export default function App() {
         <Switch>
           {/* protect this route */}
           <Route exact path="/">
-            { userIsNotLoggedIn ? <AuthPage /> : <Redirect to="books" />
+            { !user ? <AuthPage /> : <Redirect to="movies" />
             }
           </Route>
           <Route exact path="/movies">

@@ -1,4 +1,3 @@
-import { SupabaseClient } from '@supabase/supabase-js';
 import { useState } from 'react';
 import { signUp } from './services/fetch.utils';
 
