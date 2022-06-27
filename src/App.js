@@ -8,6 +8,7 @@ import {
 import DetailPage from './DetailPage';
 import ListPage from './ListPage';
 import AuthPage from './AuthPage';
+import UpdatePage from './UpdatePage';
 import CreatePage from './CreatePage';
 
 
@@ -18,13 +19,16 @@ export default function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Sign in</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/create">Add Movie comment</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to="/movie/1">update movie</Link>
+            </li>
+            <li>
+              <Link to="/movies">Movie list</Link>
             </li>
           </ul>
         </nav>
@@ -32,14 +36,14 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <AuthPage />
           </Route>
-          <Route path="/movies">
+          <Route exact path="/movies">
             <ListPage />
           </Route>
-          <Route path="/create">
-            <CreatePage />
+          <Route exact path="/create/id">
+            <UpdatePage />
           </Route>
         </Switch>
       </div>
