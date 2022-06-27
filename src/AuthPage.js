@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { signUp } from './services/fetch.utils';
+import { signIn, signUp } from './services/fetch.utils';
 
 
 
@@ -22,28 +22,30 @@ export default function AuthPage({ setUser }) {
 
   async function handleSignInSubmit(e) {
     e.preventDefault();
-    const user = await signUp(signInEmail, signInPassword);
+    const user = await signIn(signInEmail, signInPassword);
     setUser(user);
   }
+
+  
 
   return (
     <div className='forms'>
       <form onSubmit={handleSignInSubmit}> 
-      Sign In
+        <h2>Sign In</h2>
         {/* the handle submit will be an async function, gonna call supabase. */}
         <lable> email 
           {/* this is a controlled input.
             whatever shows up here becomes the state */}
-          <input onChange={e => setSignInEmail(e.target.value)} value={email} type="email"/> 
+          <input onChange={e => setSignInEmail(e.target.value)} value={signInEmail} type="email"/> 
         </lable>
       </form>
       <form>
-        <lable> password <input onChange={e => setSignInPassword(e.target.value)} value={password} type="password"/>
+        <lable> password <input onChange={e => setSignInPassword(e.target.value)} value={signInPassword} type="password"/>
         </lable>
         <button>Sign in!</button>
       </form>
       <form onSubmit={handleSubmit}> 
-      Sign Up
+        <h2>Sign Up</h2>
         {/* the handle submit will be an async function, gonna call supabase. */}
         <lable> email 
           {/* this is a controlled input.

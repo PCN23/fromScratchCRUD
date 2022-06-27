@@ -20,3 +20,8 @@ export async function signIn(email, password) {
     password: password,
   });
 }
+
+export async function logout() {
+  const { error } = await client.auth.signOut();
+
+}

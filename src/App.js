@@ -8,22 +8,31 @@ import {
   Link,
   Redirect
 } from 'react-router-dom';
-import DetailPage from './DetailPage';
+// import DetailPage from './DetailPage';
 import ListPage from './ListPage';
 import AuthPage from './AuthPage';
 import UpdatePage from './UpdatePage';
 import CreatePage from './CreatePage';
+import { logout } from './services/fetch.utils';
 
 
 export default function App() {
   const [user, setUser] = useState(client.auth.user());
 
+  function handleLogoutClick() {
+    logout();
+    // now change state
+    setUser('');
 
+
+
+  }
   return (
     <Router>
       <div>
         <nav>
           <ul>
+            <button onClick={handleLogoutClick}>logout</button>
             <li>
               <Link to="/">Sign in</Link>
             </li>
@@ -50,9 +59,13 @@ export default function App() {
           <Route exact path="/movies">
             <ListPage />
           </Route>
-          <Route exact path="/create/id">
-            <UpdatePage />
+          <Route exact path="/create/:id">
+            <UpdatePage /> 
           </Route>
+          <Route exact path="/create">
+            <CreatePage />
+          </Route>
+          
         </Switch>
       </div>
     </Router>
