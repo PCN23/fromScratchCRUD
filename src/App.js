@@ -14,36 +14,43 @@ import AuthPage from './AuthPage';
 import UpdatePage from './UpdatePage';
 import CreatePage from './CreatePage';
 import { logout } from './services/fetch.utils';
+import './App.css';
 
 
 export default function App() {
   const [user, setUser] = useState(client.auth.user());
 
-  function handleLogoutClick() {
-    logout();
+
+
+  async function handleLogoutClick() {
+    await logout();
     // now change state
     setUser('');
 
-
-
   }
+
+
   return (
     <Router>
       <div>
         <nav>
           <ul>
-            <button onClick={handleLogoutClick}>logout</button>
+            
             <li>
               <Link to="/">Sign in</Link>
             </li>
             <li>
-              <Link to="/create">Add Movie comment</Link>
+              <Link to="/create">Create new movie</Link>
             </li>
             <li>
               <Link to="/movie/1">update movie</Link>
             </li>
             <li>
               <Link to="/movies">Movie list</Link>
+            </li>
+            <li>
+              {user && 
+              <button onClick={handleLogoutClick}>logout</button>}
             </li>
           </ul>
         </nav>
@@ -53,11 +60,15 @@ export default function App() {
         <Switch>
           {/* protect this route */}
           <Route exact path="/">
-            { !user ? <AuthPage setUser={setUser} /> : <Redirect to="movies" />
+            { 
+              !user ? <AuthPage setUser={setUser} /> 
+                : <Redirect to="/movies" />
             }
           </Route>
-          <Route exact path="/movies">
-            <ListPage />
+          <Route exact path="/movies"> 
+            {
+              user ? <ListPage /> : <Redirect to="/" />
+            }
           </Route>
           <Route exact path="/create/:id">
             <UpdatePage /> 
