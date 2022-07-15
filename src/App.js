@@ -1,9 +1,11 @@
 import React from 'react';
+import { useState } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
   Link
 } from 'react-router-dom';
 import ListPage from './ListPage';
@@ -14,6 +16,8 @@ import UpdatePage from './UpdatePage';
 
 
 export default function App() {
+  const [user, setUser] = useState();
+
   return (
     <Router>
       <div>
@@ -23,10 +27,13 @@ export default function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/create">Create new movie watchlist.</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to="/movies/1">Update movie list</Link>
+            </li>
+            <li>
+              <Link to="/movies"> movie list</Link>
             </li>
           </ul>
         </nav>
@@ -35,7 +42,12 @@ export default function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route exact path="/">
-            <AuthPage />
+            {
+              !user
+                ? <AuthPage setUser={setUser} /> 
+                : <Redirect to="/movies" />
+
+            }
           </Route>
           <Route exact path="/movies">
             <ListPage />
