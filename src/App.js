@@ -52,10 +52,10 @@ export default function App() {
           <Route exact path="/movies">
             <ListPage />
           </Route>
-          <Route path="/create">
+          <Route exact path="/create">
             <CreatePage />
           </Route>
-          <Route path="/movies/:id">
+          <Route exact path="/movies/:id">
             <UpdatePage />
           </Route>
         </Switch>
